@@ -27,7 +27,8 @@ website_remote = '' # The url of the sv-group website which should be scraped
 
 ## Hosting with docker
 
-The menu scraper is also available as a docker image published to the github container registry. It can be pulled with the following command:
+The menu scraper is also available as a docker image published to the GitHub container registry. The image contains a cronjob which runs the scraper once a day (at 00:00 UTC).
+The image can be pulled with the following command:
 
 ```bash
 docker pull ghcr.io/virtbad/menu-scraper:latest
