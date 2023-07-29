@@ -25,6 +25,26 @@ website_remote = '' # The url of the sv-group website which should be scraped
 > 
 > When an environment variable is set, it will be used instead of the configuration value.
 
+## Hosting with docker
+
+The menu scraper is also available as a docker image published to the github container registry. It can be pulled with the following command:
+
+```bash
+docker pull ghcr.io/virtbad/menu-scraper:latest
+```
+
+> Every image has its own tag, which is the same as the version of the scraper. You can find all available tags [here](https://github.com/virtbad/menu-scraper-rs/tags). 
+> To get the latest version use the `latest` tag.
+
+### Configuration
+
+Once pulled you need to run the container with the following environment variables to configure it properly. The scraper needs to be able to access the api and the website, so you need to provide the urls to them.
+
+```bash
+API="" # The url of the menu-api
+WEBSITE="" # The url of the sv-group website which should be scraped
+```
+
 # Related Projects
 
 * [menu-api](https://github.com/virtbad/menu-api)
