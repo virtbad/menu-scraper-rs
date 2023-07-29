@@ -15,12 +15,16 @@ impl Config {
 
         // overwrite config values should environment variables be set
         if let Ok(api_remote) = std::env::var("API") {
-            info!("Overwriting api_remote with API environment variable");
-            cfg.api_remote = api_remote;
+            if !api_remote.is_empty() {
+                info!("Overwriting api_remote with API environment variable");
+                cfg.api_remote = api_remote;
+            }
         }
         if let Ok(website_remote) = std::env::var("WEBSITE") {
-            info!("Overwriting website_remote with WEBSITE environment variable");
-            cfg.website_remote = website_remote;
+            if !website_remote.is_empty() {
+                info!("Overwriting website_remote with WEBSITE environment variable");
+                cfg.website_remote = website_remote;
+            }
         }
 
         Ok(cfg)
