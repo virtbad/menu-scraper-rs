@@ -27,8 +27,9 @@ RUN echo "0 0 * * * /app/menu-scraper-rs" > /etc/crontabs/root
 # Set permissions for cron
 RUN chmod 600 /etc/crontabs/root
 
+RUN echo '#!/bin/sh' > /app/initial.sh
 # Run the binary on container start or skip if it's INITIAL_RUN is false
-RUN echo 'if [ "$INITIAL_RUN" == "true" ]; then /app/menu-scraper-rs; else echo "Initial run skipped"; fi' > /app/initial.sh
+RUN echo 'if [ "$INITIAL_RUN" == "true" ]; then /app/menu-scraper-rs; else echo "Initial run skipped"; fi' >> /app/initial.sh
 # Add forground cron to the end of the script
 RUN echo "crond -f" >> /app/initial.sh
 RUN chmod +x /app/initial.sh

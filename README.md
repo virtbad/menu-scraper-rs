@@ -11,7 +11,7 @@ Ideally the scraper is run once a day in something like a cron-job, so that the 
 
 ## Configuration
 
-The configuration of the scraper is stored at `[os-config-dir]/menu-scraper/menu-scraper.toml`. 
+The configuration of the scraper is stored at `[os-config-dir]/menu-scraper/menu-scraper.toml`.
 Should this file not exist, it will be created with default values which then need to be replaced.
 
 ```toml
@@ -22,7 +22,7 @@ website_remote = '' # The url of the sv-group website which should be scraped
 > The configuration values can be overwritten by the following environment variables:
 > * `API` overwrites the `api_remote` value
 > * `WEBSITE` overwrites the `website_remote` value
-> 
+>
 > When an environment variable is set, it will be used instead of the configuration value.
 
 ## Hosting with docker
@@ -33,9 +33,12 @@ The image can be pulled with the following command:
 ```bash
 docker pull ghcr.io/virtbad/menu-scraper:latest
 ```
-
-> Every image has its own tag, which is the same as the version of the scraper. You can find all available tags [here](https://github.com/virtbad/menu-scraper-rs/tags). 
+> **Note**
+> Every image has its own tag, which is the same as the version of the scraper. You can find all available tags [here](https://github.com/virtbad/menu-scraper-rs/tags).
 > To get the latest version use the `latest` tag.
+
+> **Important**
+> The container needs to be run with the `--init` flag (or `init: true` in docker-compose) to work properly. This is due to an issue in cron (https://github.com/dubiousjim/dcron/issues/13#issuecomment-1406937781).
 
 ### Configuration
 
@@ -44,6 +47,7 @@ Once pulled you need to run the container with the following environment variabl
 ```bash
 API="" # The url of the menu-api
 WEBSITE="" # The url of the sv-group website which should be scraped
+INITIAL_RUN="true" # Boolean whether the scraper should run immediately after startup (default: true)
 ```
 
 # Related Projects
